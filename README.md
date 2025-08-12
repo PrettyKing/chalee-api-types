@@ -1,101 +1,101 @@
 # Chalee API Types
 
-A powerful CLI tool for generating TypeScript types from API schemas with support for OpenAPI, JSON Schema, and custom formats.
+一个强大的CLI工具，用于从API模式生成TypeScript类型，支持OpenAPI、JSON Schema和自定义格式。
 
-## Features
+## 🚀 特性
 
-- 🚀 Generate TypeScript types from various schema formats
-- 📝 Support for OpenAPI/Swagger and JSON Schema
-- 🔄 Sync types from remote API endpoints
-- ✅ Schema validation with detailed error reporting
-- 🎯 Project initialization with templates
-- 🛠️ Customizable output formats (TypeScript, JavaScript, JSON)
-- 📦 Easy integration with existing projects
+- 🔥 从多种模式格式生成TypeScript类型
+- 📝 支持OpenAPI/Swagger和JSON Schema
+- 🔄 从远程API端点同步类型定义
+- ✅ 模式验证，提供详细的错误报告
+- 🎯 项目初始化，包含模板和配置
+- 🛠️ 可自定义的输出格式（TypeScript、JavaScript、JSON）
+- 📦 易于集成到现有项目中
 
-## Installation
+## 📦 安装
 
 ```bash
-# Install from your private registry
+# 从私有仓库安装
 npm install chalee-api-types --registry http://8.134.93.68:4873/
 
-# Or install globally
+# 或者全局安装
 npm install -g chalee-api-types --registry http://8.134.93.68:4873/
 ```
 
-## Quick Start
+## 🚀 快速开始
 
 ```bash
-# Initialize a new project
+# 初始化新项目
 chalee-types init
 
-# Generate types from schema
+# 从模式文件生成类型
 chalee-types generate --input ./schemas/api.json --output ./types
 
-# Validate a schema file
+# 验证模式文件
 chalee-types validate ./schemas/api.json
 
-# Sync types from remote API
+# 从远程API同步类型
 chalee-types sync --url https://api.example.com/openapi.json --output ./types
 ```
 
-## Commands
+## 📖 命令
 
-### `init`
-Initialize a new Chalee types project with templates and configuration.
-
-```bash
-chalee-types init [options]
-
-Options:
-  -t, --template <template>  Project template (basic|advanced) (default: "basic")
-```
-
-### `generate` (alias: `gen`)
-Generate TypeScript types from API schema files.
+### `init` - 初始化项目
+使用模板和配置初始化一个新的Chalee类型项目。
 
 ```bash
-chalee-types generate [options]
+chalee-types init [选项]
 
-Options:
-  -i, --input <path>     Input schema file path
-  -o, --output <path>    Output directory (default: "./types")
-  -f, --format <format>  Output format (ts|js|json) (default: "ts")
-  --no-comments          Exclude comments in generated types
+选项:
+  -t, --template <template>  项目模板 (basic|advanced) (默认: "basic")
 ```
 
-### `validate`
-Validate API schema files for correctness and best practices.
+### `generate` (别名: `gen`) - 生成类型
+从API模式文件生成TypeScript类型。
 
 ```bash
-chalee-types validate <schema> [options]
+chalee-types generate [选项]
 
-Arguments:
-  schema                 Schema file to validate
-
-Options:
-  --strict              Enable strict validation mode
+选项:
+  -i, --input <path>     输入模式文件路径
+  -o, --output <path>    输出目录 (默认: "./types")
+  -f, --format <format>  输出格式 (ts|js|json) (默认: "ts")
+  --no-comments          生成的类型中不包含注释
 ```
 
-### `sync`
-Synchronize types from remote API endpoints.
+### `validate` - 验证模式
+验证API模式文件的正确性和最佳实践。
 
 ```bash
-chalee-types sync [options]
+chalee-types validate <schema> [选项]
 
-Options:
-  -u, --url <url>        API endpoint URL
-  -o, --output <path>    Output directory (default: "./types")
-  -h, --headers <json>   Custom headers (JSON format)
+参数:
+  schema                 要验证的模式文件
+
+选项:
+  --strict              启用严格验证模式
 ```
 
-## Configuration
+### `sync` - 同步类型
+从远程API端点同步类型定义。
 
-Create a `chalee.config.json` file in your project root:
+```bash
+chalee-types sync [选项]
+
+选项:
+  -u, --url <url>        API端点URL
+  -o, --output <path>    输出目录 (默认: "./types")
+  -h, --headers <json>   自定义请求头 (JSON格式)
+```
+
+## ⚙️ 配置
+
+在项目根目录创建 `chalee.config.json` 文件：
 
 ```json
 {
   "name": "my-api-types",
-  "description": "API types for my project",
+  "description": "我的项目API类型",
   "version": "1.0.0",
   "schemaPath": "./schemas",
   "outputPath": "./types",
@@ -104,14 +104,14 @@ Create a `chalee.config.json` file in your project root:
 }
 ```
 
-## Supported Schema Formats
+## 📋 支持的模式格式
 
 ### OpenAPI/Swagger
 ```json
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "My API",
+    "title": "我的API",
     "version": "1.0.0"
   },
   "components": {
@@ -132,7 +132,7 @@ Create a `chalee.config.json` file in your project root:
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "User Schema",
+  "title": "用户模式",
   "definitions": {
     "User": {
       "type": "object",
@@ -146,43 +146,44 @@ Create a `chalee.config.json` file in your project root:
 }
 ```
 
-## Examples
+## 💡 使用示例
 
-### Basic Usage
+### 基本用法
 ```bash
-# Generate from local schema
+# 从本地模式生成
 chalee-types generate -i ./api-schema.json -o ./src/types
 
-# Sync from remote API
+# 从远程API同步
 chalee-types sync \
   --url https://petstore.swagger.io/v2/swagger.json \
   --output ./types \
   --headers '{"Authorization": "Bearer token"}'
 ```
 
-### Project Structure
+### 项目结构
 ```
 my-project/
-├── schemas/
+├── schemas/              # 模式文件目录
 │   ├── user.json
 │   └── product.json
-├── types/           # Generated types
-├── chalee.config.json
+├── types/               # 生成的类型文件
+├── chalee.config.json   # 配置文件
 └── package.json
 ```
 
-## Generated Output
+## 📄 生成示例
 
-Input schema:
+输入模式：
 ```json
 {
   "definitions": {
     "User": {
       "type": "object",
+      "description": "用户信息",
       "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "email": { "type": "string", "format": "email" }
+        "id": { "type": "string", "description": "用户ID" },
+        "name": { "type": "string", "description": "用户名" },
+        "email": { "type": "string", "format": "email", "description": "邮箱" }
       },
       "required": ["id", "name"]
     }
@@ -190,7 +191,7 @@ Input schema:
 }
 ```
 
-Generated TypeScript:
+生成的TypeScript：
 ```typescript
 /**
  * API Types
@@ -200,77 +201,84 @@ Generated TypeScript:
  * Do not edit this file directly.
  */
 
+/**
+ * 用户信息
+ */
 export interface User {
+  /** 用户ID */
   id: string;
+  /** 用户名 */
   name: string;
+  /** 邮箱 */
   email?: string;
 }
 
 export type { User };
 ```
 
-## Development
+## 🛠️ 开发
 
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/PrettyKing/chalee-api-types.git
 cd chalee-api-types
 
-# Install dependencies
+# 安装依赖
 npm install
 
-# Build the project
+# 构建项目
 npm run build
 
-# Run in development mode
+# 开发模式运行
 npm run dev
 
-# Run tests
+# 运行测试
 npm test
 
-# Lint code
+# 代码检查
 npm run lint
 
-# Format code
+# 格式化代码
 npm run format
 ```
 
-## Publishing to Private Registry
+## 📤 发布到私有仓库
 
 ```bash
-# Set registry for this package
+# 设置仓库地址
 npm config set registry http://8.134.93.68:4873/
 
-# Login to your registry (if authentication required)
+# 登录到仓库（如果需要认证）
 npm login --registry http://8.134.93.68:4873/
 
-# Use the publish script
+# 使用发布脚本
 chmod +x scripts/publish.sh
 ./scripts/publish.sh
 
-# Or publish manually
+# 或手动发布
 npm publish
 ```
 
-## Project Structure
+## 📁 项目结构
 
 ```
 chalee-api-types/
 ├── src/
-│   ├── index.ts              # Main CLI entry point
-│   ├── commands/             # Command implementations
-│   │   ├── generate.ts       # Generate command
-│   │   ├── init.ts          # Init command
-│   │   ├── validate.ts      # Validate command
-│   │   └── sync.ts          # Sync command
-│   └── utils/               # Utility classes
-│       ├── schema-parser.ts # Schema parsing logic
-│       └── type-generator.ts # Type generation logic
+│   ├── index.ts              # CLI主入口
+│   ├── commands/             # 命令实现
+│   │   ├── generate.ts       # 生成命令
+│   │   ├── init.ts          # 初始化命令
+│   │   ├── validate.ts      # 验证命令
+│   │   └── sync.ts          # 同步命令
+│   └── utils/               # 工具类
+│       ├── schema-parser.ts # 模式解析逻辑
+│       └── type-generator.ts # 类型生成逻辑
 ├── bin/
-│   └── chalee-types.js      # Executable file
+│   └── chalee-types.js      # 可执行文件
 ├── scripts/
-│   └── publish.sh           # Publishing script
-├── dist/                    # Built output (generated)
+│   └── publish.sh           # 发布脚本
+├── examples/                # 示例文件
+├── dist/                    # 构建输出（自动生成）
 ├── package.json
 ├── tsconfig.json
 ├── .eslintrc.js
@@ -278,25 +286,124 @@ chalee-api-types/
 └── README.md
 ```
 
-## Contributing
+## 🔧 高级用法
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### CI/CD集成示例
+```yaml
+name: 生成和更新类型
 
-## License
+on:
+  push:
+    paths:
+      - 'schemas/**'
 
-MIT License - see the [LICENSE](LICENSE) file for details.
+jobs:
+  generate-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: 安装 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          registry-url: 'http://8.134.93.68:4873/'
+          
+      - name: 安装 chalee-api-types
+        run: npm install -g chalee-api-types
+        
+      - name: 生成类型
+        run: chalee-types generate -i schemas/ -o src/types
+        
+      - name: 提交更改
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/types/
+          git diff --staged --quiet || git commit -m "更新生成的类型"
+          git push
+```
 
-## Changelog
+### 批量处理
+```bash
+# 处理多个模式文件
+for schema in schemas/*.json; do
+  chalee-types generate -i "$schema" -o types/$(basename "$schema" .json)
+done
+```
+
+### 微服务架构
+```bash
+# 为每个服务生成类型
+chalee-types sync --url http://user-service/api/schema --output types/user
+chalee-types sync --url http://order-service/api/schema --output types/order
+chalee-types sync --url http://product-service/api/schema --output types/product
+```
+
+## 🤝 贡献
+
+1. Fork 这个仓库
+2. 创建你的特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交你的更改 (`git commit -m '添加一些很棒的特性'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 打开一个 Pull Request
+
+## 📄 许可证
+
+MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+## 📝 更新日志
 
 ### v1.0.0
-- Initial release
-- Basic CLI commands (init, generate, validate, sync)
-- Support for OpenAPI and JSON Schema
-- TypeScript, JavaScript, and JSON output formats
-- Schema validation with error reporting
-- Remote API synchronization
-- Project templates and configuration
+- 首次发布
+- 基础CLI命令 (init, generate, validate, sync)
+- 支持OpenAPI和JSON Schema
+- TypeScript、JavaScript和JSON输出格式
+- 模式验证和错误报告
+- 远程API同步功能
+- 项目模板和配置
+
+## 🆘 故障排除
+
+### 常见问题
+
+1. **权限错误**
+   ```bash
+   chmod +x bin/chalee-types.js
+   ```
+
+2. **registry连接失败**
+   ```bash
+   # 检查registry是否可访问
+   curl http://8.134.93.68:4873/
+   
+   # 重新设置registry
+   npm config set registry http://8.134.93.68:4873/
+   ```
+
+3. **构建失败**
+   ```bash
+   # 清理并重新安装
+   rm -rf node_modules dist
+   npm install
+   npm run build
+   ```
+
+4. **类型生成失败**
+   ```bash
+   # 验证schema文件
+   chalee-types validate your-schema.json
+   ```
+
+### 调试模式
+
+设置环境变量启用详细日志：
+```bash
+DEBUG=chalee-types:* chalee-types generate -i schema.json
+```
+
+## 📞 支持
+
+- 📖 [文档](https://github.com/PrettyKing/chalee-api-types)
+- 🐛 [问题跟踪](https://github.com/PrettyKing/chalee-api-types/issues)
+- 💬 [讨论](https://github.com/PrettyKing/chalee-api-types/discussions)
