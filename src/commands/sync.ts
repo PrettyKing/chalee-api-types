@@ -25,7 +25,7 @@ export async function syncTypes(options: SyncOptions) {
     if (options.headers) {
       try {
         headers = JSON.parse(options.headers);
-      } catch (error) {
+      } catch (error: any) {
         spinner.fail('Invalid headers format. Use JSON format.');
         process.exit(1);
       }
@@ -64,7 +64,7 @@ export async function syncTypes(options: SyncOptions) {
     console.log(chalk.cyan(`Types: ${outputFile}`));
     console.log(chalk.cyan(`Schema: ${schemaFile}`));
 
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       spinner.fail(`API request failed: ${error.response.status} ${error.response.statusText}`);
     } else {
