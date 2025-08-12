@@ -16,10 +16,10 @@
 
 ```bash
 # 从私有仓库安装
-npm install chalee-api-types --registry http://8.134.93.68:4873/
+npm install chalee-api-types --registry http://your-registry-host:4873/
 
 # 或者全局安装
-npm install -g chalee-api-types --registry http://8.134.93.68:4873/
+npm install -g chalee-api-types --registry http://your-registry-host:4873/
 ```
 
 ## 🚀 快速开始
@@ -244,15 +244,30 @@ npm run format
 
 ## 📤 发布到私有仓库
 
+### 配置私有仓库
+
+首先，在你的 `package.json` 中配置私有仓库地址：
+
+```json
+{
+  "publishConfig": {
+    "registry": "http://your-registry-host:4873/"
+  }
+}
+```
+
+### 发布步骤
+
 ```bash
 # 设置仓库地址
-npm config set registry http://8.134.93.68:4873/
+npm config set registry http://your-registry-host:4873/
 
 # 登录到仓库（如果需要认证）
-npm login --registry http://8.134.93.68:4873/
+npm login --registry http://your-registry-host:4873/
 
 # 使用发布脚本
 chmod +x scripts/publish.sh
+# 编辑 scripts/publish.sh 文件，将 REGISTRY_URL 设置为你的私有仓库地址
 ./scripts/publish.sh
 
 # 或手动发布
@@ -307,7 +322,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          registry-url: 'http://8.134.93.68:4873/'
+          registry-url: 'http://your-registry-host:4873/'
           
       - name: 安装 chalee-api-types
         run: npm install -g chalee-api-types
@@ -375,10 +390,10 @@ MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 2. **registry连接失败**
    ```bash
    # 检查registry是否可访问
-   curl http://8.134.93.68:4873/
+   curl http://your-registry-host:4873/
    
    # 重新设置registry
-   npm config set registry http://8.134.93.68:4873/
+   npm config set registry http://your-registry-host:4873/
    ```
 
 3. **构建失败**
