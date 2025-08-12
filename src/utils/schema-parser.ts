@@ -29,7 +29,7 @@ export class SchemaParser {
       }
       
       throw new Error('Unsupported schema format');
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof SyntaxError) {
         throw new Error('Invalid JSON syntax in schema file');
       }
@@ -63,7 +63,7 @@ export class SchemaParser {
         warnings
       };
 
-    } catch (error) {
+    } catch (error: any) {
       errors.push(`Invalid JSON: ${error.message}`);
       return { valid: false, errors, warnings };
     }
