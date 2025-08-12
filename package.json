@@ -50,6 +50,6 @@
     "node": ">=14.0.0"
   },
   "publishConfig": {
-    "registry": "http://8.134.93.68:4873/"
+    "registry": "http://your-registry-host:4873/"
   }
 }
