@@ -5,7 +5,8 @@
 
 set -e  # Exit on any error
 
-REGISTRY_URL="http://8.134.93.68:4873/"
+# 配置你的私有仓库地址
+REGISTRY_URL="http://your-registry-host:4873/"
 PACKAGE_NAME="chalee-api-types"
 
 echo "🚀 Publishing $PACKAGE_NAME to private registry..."
@@ -13,6 +14,14 @@ echo "🚀 Publishing $PACKAGE_NAME to private registry..."
 # Check if we're in the right directory
 if [ ! -f "package.json" ]; then
     echo "❌ Error: package.json not found. Make sure you're in the project root."
+    exit 1
+fi
+
+# 提示用户配置registry地址
+if [[ "$REGISTRY_URL" == "http://your-registry-host:4873/" ]]; then
+    echo "⚠️  请先在脚本中配置你的私有仓库地址！"
+    echo "编辑 scripts/publish.sh 文件，将 REGISTRY_URL 设置为你的实际地址"
+    echo "例如: REGISTRY_URL=\"http://192.168.1.100:4873/\""
     exit 1
 fi
 
