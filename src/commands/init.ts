@@ -117,7 +117,7 @@ dist/
     console.log(chalk.gray('2. Run: chalee-types generate'));
     console.log(chalk.gray('3. Import generated types from ./types/'));
 
-  } catch (error) {
+  } catch (error: any) {
     spinner.fail(`Failed to initialize project: ${error.message}`);
     process.exit(1);
   }

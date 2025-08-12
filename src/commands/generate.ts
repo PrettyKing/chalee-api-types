@@ -54,7 +54,7 @@ export async function generateTypes(options: GenerateOptions) {
     console.log(chalk.cyan(`Output: ${outputFile}`));
     console.log(chalk.gray(`Generated ${Object.keys(schema.definitions || {}).length} type definitions`));
 
-  } catch (error) {
+  } catch (error: any) {
     spinner.fail(`Failed to generate types: ${error.message}`);
     console.error(chalk.red(error.stack));
     process.exit(1);
