@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User API Schema",
+  "description": "API schema for user management system",
+  "version": "1.0.0",
+  "type": "object",
+  "definitions": {
+    "User": {
+      "type": "object",
+      "description": "用户信息",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "用户唯一标识符"
+        },
+        "username": {
+          "type": "string",
+          "description": "用户名",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "邮箱地址"
+        },
+        "avatar": {
+          "type": "string",
+          "format": "uri",
+          "description": "头像URL"
+        },
+        "profile": {
+          "$ref": "#/definitions/UserProfile"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          },
+          "description": "用户角色列表"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive", "pending", "suspended"],
+          "description": "用户状态"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "更新时间"
+        }
+      },
+      "required": ["id", "username", "email", "status", "createdAt"]
+    },
+    "UserProfile": {
+      "type": "object",
+      "description": "用户详细资料",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "名字"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "姓氏"
+        },
+        "bio": {
+          "type": "string",
+          "description": "个人简介",
+          "maxLength": 500
+        },
+        "location": {
+          "type": "string",
+          "description": "所在地"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "description": "个人网站"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "出生日期"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+?[1-9]\\d{1,14}$",
+          "description": "电话号码"
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "description": "用户角色",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "角色ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "角色名称"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "权限列表"
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "CreateUserRequest": {
+      "type": "object",
+      "description": "创建用户请求",
+      "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 8,
+          "description": "密码，至少8位字符"
+        },
+        "profile": {
+          "$ref": "#/definitions/UserProfile"
+        }
+      },
+      "required": ["username", "email", "password"]
+    },
+    "UpdateUserRequest": {
+      "type": "object",
+      "description": "更新用户请求",
+      "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "avatar": {
+          "type": "string",
+          "format": "uri"
+        },
+        "profile": {
+          "$ref": "#/definitions/UserProfile"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive", "pending", "suspended"]
+        }
+      }
+    },
+    "UserListResponse": {
+      "type": "object",
+      "description": "用户列表响应",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/Pagination"
+        }
+      },
+      "required": ["users", "pagination"]
+    },
+    "Pagination": {
+      "type": "object",
+      "description": "分页信息",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "当前页码"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "每页数量"
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "总数量"
+        },
+        "totalPages": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "总页数"
+        }
+      },
+      "required": ["page", "limit", "total", "totalPages"]
+    },
+    "ApiResponse": {
+      "type": "object",
+      "description": "API标准响应格式",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "请求是否成功"
+        },
+        "message": {
+          "type": "string",
+          "description": "响应消息"
+        },
+        "data": {
+          "description": "响应数据"
+        },
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "details": {}
+          }
+        }
+      },
+      "required": ["success"]
+    }
+  }
+}
